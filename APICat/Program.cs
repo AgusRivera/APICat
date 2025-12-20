@@ -1,10 +1,15 @@
-using APICat.Extensions;
-using Serilog;
-using Microsoft.EntityFrameworkCore;
+using ApiCat.Extensions;
 using APICat.Application.Extensions;
-using Microsoft.OpenApi;
-using ApiCNV.Extensions;
+using APICat.Extensions;
 using APICat.Infraestructure.Contexts;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using System.Text;
 
 const string nombreProyecto = "APICat";
 
@@ -36,6 +41,20 @@ try
     builder.Services.AddRepositoriesAndServices();
     builder.RegisterExternalServices();
 
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+            };
+        });
 
     // Add Controllers
     builder.Services.AddControllers();
@@ -58,9 +77,34 @@ try
                 Description = "API General que centraliza las peticiones de acceso a datos del clima",
                 Version = "V1"
             });
+
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "Ingrese su token JWT."
+            });
+
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                }
+            });
         });
     }
-
+    
     var app = builder.Build();
 
     if (app.Environment.IsDevelopment())

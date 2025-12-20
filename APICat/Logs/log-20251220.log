@@ -111,3 +111,54 @@ System.InvalidOperationException: Unable to resolve service for type 'FluentVali
 [2025-12-20 03:02:26 INF] >>>>> APICat: Iniciando la Aplicación
 [2025-12-20 03:02:47 WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while while scanning assembly 'APICat.Infraestructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 [2025-12-20 03:02:52 INF] HTTP POST /Cat/Insert responded 200 in 6236.5901 ms
+[2025-12-20 11:16:18 INF] >>>>> APICat: Iniciando la Aplicación
+[2025-12-20 11:16:24 ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Method not found: 'System.Collections.Generic.IDictionary`2<System.String,Microsoft.OpenApi.OpenApiMediaType> Microsoft.OpenApi.IOpenApiRequestBody.get_Content()'.
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOpenApiOperationFromMetadataAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, OpenApiDocument document)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOpenApiOperationFromMetadataAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, OpenApiDocument document)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository, Func`4 parametersGenerator, Func`4 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`4 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2025-12-20 11:24:46 INF] >>>>> APICat: Iniciando la Aplicación
+[2025-12-20 11:24:49 ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Method not found: 'System.Collections.Generic.IDictionary`2<System.String,Microsoft.OpenApi.OpenApiMediaType> Microsoft.OpenApi.IOpenApiRequestBody.get_Content()'.
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOpenApiOperationFromMetadataAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, OpenApiDocument document)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOpenApiOperationFromMetadataAsync(ApiDescription apiDescription, SchemaRepository schemaRepository, OpenApiDocument document)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository, Func`4 parametersGenerator, Func`4 bodyGenerator, Func`3 applyFilters)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationAsync(OpenApiDocument document, ApiDescription apiDescription, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`4 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+[2025-12-20 11:27:06 INF] >>>>> APICat: Iniciando la Aplicación
+[2025-12-20 11:28:28 INF] HTTP POST /api/auth/Login responded 200 in 151.9376 ms
+[2025-12-20 11:30:23 INF] HTTP POST /api/auth/Login responded 200 in 4.9923 ms
+[2025-12-20 11:30:26 INF] HTTP POST /api/auth/Login responded 200 in 2.0478 ms
+[2025-12-20 11:30:27 INF] HTTP POST /api/auth/Login responded 200 in 1.5322 ms
+[2025-12-20 11:30:28 INF] HTTP POST /api/auth/Login responded 200 in 0.9060 ms
+[2025-12-20 11:30:29 INF] HTTP POST /api/auth/Login responded 200 in 0.7478 ms
+[2025-12-20 11:30:29 INF] HTTP POST /api/auth/Login responded 200 in 1.0730 ms
+[2025-12-20 11:30:30 INF] HTTP POST /api/auth/Login responded 200 in 0.7612 ms
+[2025-12-20 11:30:30 INF] HTTP POST /api/auth/Login responded 200 in 0.9302 ms
+[2025-12-20 11:30:31 INF] HTTP POST /api/auth/Login responded 200 in 0.9106 ms
+[2025-12-20 11:32:25 INF] HTTP POST /api/auth/Login responded 401 in 1.8294 ms
+[2025-12-20 11:33:21 INF] HTTP POST /api/auth/Login responded 200 in 35.2234 ms
+[2025-12-20 11:38:42 INF] HTTP POST /api/auth/Login responded 401 in 7.9268 ms
+[2025-12-20 11:38:56 INF] HTTP POST /api/auth/Login responded 200 in 3.5334 ms
+[2025-12-20 11:42:03 INF] HTTP POST /api/auth/Login responded 200 in 22.3026 ms
+[2025-12-20 11:44:32 INF] >>>>> APICat: Iniciando la Aplicación
+[2025-12-20 11:44:53 INF] HTTP POST /api/auth/Login responded 200 in 115.0798 ms
+[2025-12-20 15:11:00 INF] >>>>> APICat: Iniciando la Aplicación
+[2025-12-20 15:11:23 INF] HTTP POST /api/auth/Login responded 200 in 272.2236 ms
+[2025-12-20 15:11:48 WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while while scanning assembly 'APICat.Infraestructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+[2025-12-20 15:11:57 INF] HTTP GET /Cat/Breeds responded 200 in 9606.5130 ms
+[2025-12-20 15:17:01 INF] HTTP GET /Cat/Breeds responded 200 in 7706.8460 ms

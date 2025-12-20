@@ -2,7 +2,7 @@
 using APICat.Application.Services;
 using System.Runtime.CompilerServices;
 
-namespace ApiCNV.Extensions
+namespace ApiCat.Extensions
 {
     public static class ExternalServiceCollectionExtension
     {

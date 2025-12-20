@@ -1,13 +1,15 @@
-﻿using APICat.Infraestructure.Repositories;
-using APICat.Logging.Factory;
+﻿using APICat.Application.Interfaces;
+using APICat.Application.Interfaces.Auth;
+using APICat.Application.Models.Dtos;
+using APICat.Application.Services;
+using APICat.Application.Validators;
 using APICat.Domain.Interfaces.Repositories;
+using APICat.Infraestructure.Repositories;
+using APICat.Logging.Factory;
+using APIWeather.Infrastructure.Services;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using APICat.Application.Interfaces;
-using APICat.Application.Services;
-using FluentValidation;
-using APICat.Application.Models.Dtos;
-using APICat.Application.Validators;
 
 namespace APICat.Application.Extensions
 {
@@ -25,6 +27,8 @@ namespace APICat.Application.Extensions
             //Validators (Specific Implementations)
             services.AddScoped<IValidator<BreedsDto>, CatValidator>();
 
+            //JWT
+            services.AddScoped<IAuthService, JwtAuthService>();
 
             return services;
         }

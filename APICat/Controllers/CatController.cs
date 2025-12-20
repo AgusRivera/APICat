@@ -1,10 +1,12 @@
 using APICat.Application.Common;
-using Microsoft.AspNetCore.Mvc;
 using APICat.Application.Interfaces;
 using APICat.Application.Models.Dtos;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace APICat.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CatController : ControllerBase
