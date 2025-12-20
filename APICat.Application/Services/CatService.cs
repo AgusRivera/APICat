@@ -3,6 +3,7 @@ using APICat.Application.Interfaces;
 using APICat.Application.Models.Dtos;
 using APICat.Domain.Entities;
 using APICat.Domain.Entities.Base;
+using APICat.Domain.Interfaces.Repositories;
 using APICat.Infraestructure.Contexts;
 using APICat.Infraestructure.Repositories;
 using APICat.Logging.Attributes;
@@ -23,15 +24,15 @@ namespace APICat.Application.Services
     {
         private readonly CatContext _context;
         private readonly HttpClient _client;
-        private readonly Repository<Breed, Guid> _repo;
+        private readonly IRepository<Breed, Guid> _repo;
         private readonly ILogger _logger;
         private readonly IValidator<BreedsDto> _breedValidator;
 
-        public CatService(HttpClient client, CatContext context, ILogger<CatService> logger, IValidator<BreedsDto> breedValidator)
+        public CatService(HttpClient client, CatContext context, ILogger<CatService> logger, IValidator<BreedsDto> breedValidator, IRepository<Breed, Guid> repo)
         {
             _client = client;
             _context = context;
-            _repo = new Repository<Breed, Guid>(_context);
+            _repo = repo;
             _logger = logger;
             _breedValidator = breedValidator;
         }

@@ -36,6 +36,7 @@ try
 
     builder.Services.AddDbContext<CatContext>(config => config.UseSqlServer(builder.Configuration.GetConnectionString("CatDBConnection")));
 
+    builder.Services.AddScoped<DbContext, CatContext>();
 
     // Add services to the container.
     builder.Services.AddRepositoriesAndServices();
