@@ -39,9 +39,11 @@ try
 
     builder.Services.AddScoped<IDbContextResolver, DbContextResolver>();
 
+
+    builder.RegisterExternalServices(); //API Pública
+
     // Add services to the container.
     builder.Services.AddRepositoriesAndServices();
-    builder.RegisterExternalServices();
 
     builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

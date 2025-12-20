@@ -15,20 +15,17 @@ namespace APICat.Application.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-
         public static IServiceCollection AddRepositoriesAndServices(this IServiceCollection services)
         {
             // Repositories (Generic Implementation)
             services.AddScoped(typeof(IRepository<,>), typeof(Repository<,>));
 
-            //Services (Specific Implementations)
+            // Services con Proxy (Specific Implementations)
             AddLoggedService<ICatService, CatService>(services);
+            AddLoggedService<IAuthService, JwtAuthService>(services);
 
-            //Validators (Specific Implementations)
+            // Validators (Specific Implementations)
             services.AddScoped<IValidator<BreedsDto>, CatValidator>();
-
-            //JWT
-            services.AddScoped<IAuthService, JwtAuthService>();
 
             return services;
         }
@@ -37,17 +34,20 @@ namespace APICat.Application.Extensions
                 where TInterface : class
                 where TImplementation : class, TInterface
         {
+
+            services.AddScoped<TImplementation>();
+
+            // Registro INTERFAZ para que devuelva el PROXY
             services.AddScoped<TInterface>(sp =>
             {
                 var logger = sp.GetRequiredService<ILogger<TImplementation>>();
-                // Se crea el servicio usando el provider (soporta inyección de dependencias)
-                var servicioReal = ActivatorUtilities.CreateInstance<TImplementation>(sp);
+
+                var servicioReal = sp.GetRequiredService<TImplementation>();
+
                 return LoggingProxyFactory.Create<TInterface>(servicioReal, logger);
             });
 
             return services;
         }
-
-
     }
 }

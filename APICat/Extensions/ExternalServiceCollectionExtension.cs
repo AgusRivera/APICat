@@ -8,7 +8,7 @@ namespace ApiCat.Extensions
     {
         public static void RegisterExternalServices(this WebApplicationBuilder builder)
         {
-            builder.Services.AddHttpClient<ICatService, CatService>(client =>
+            builder.Services.AddHttpClient<CatService>(client =>
             {
                 client.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiCat:BaseUrl"));
                 client.DefaultRequestHeaders.Add("x-api-key", builder.Configuration.GetValue<string>("ApiCat:ApiKey"));

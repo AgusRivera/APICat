@@ -1,4 +1,5 @@
 ﻿using APICat.Application.Interfaces.Auth;
+using APICat.Logging.Attributes;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -20,6 +21,7 @@ namespace APIWeather.Infrastructure.Services
             _configuration = configuration;
         }
 
+        [LogExecution("Obteniendo Token de Session")]
         public string? GenerateToken(string username, string password)
         {
 
