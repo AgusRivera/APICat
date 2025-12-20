@@ -63,6 +63,28 @@ namespace APICat.Controllers
         }
 
         /// <summary>
+        /// Obtiene todas las razas de gatos registradas en la base de datos local.
+        /// </summary>
+        /// <returns>Lista de razas.</returns>
+        /// <response code="200">Retorna la lista de razas exitosamente.</response>
+        /// <response code="401">No autorizado.</response>
+        [HttpGet]
+        [Route("GetAllFromDb")]
+        [ProducesResponseType(typeof(IOperationResult<List<BreedsDto>>), 200)]
+        [ProducesResponseType(401)]
+        public async Task<ActionResult<IOperationResult<List<BreedsDto>>>> GetAllFromDb()
+        {
+            var result = await _catService.GetAllBreedsFromDbAsync();
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        /// <summary>
         /// Crea una nueva raza de gato en la base de datos.
         /// </summary>
         /// <param name="breeds">Datos de la raza a crear.</param>

@@ -109,6 +109,71 @@ namespace APICat.Tests.Services
 
         #endregion
 
+        #region Tests GetAllBreedsFromDbAsync
+
+        [Fact]
+        public async Task GetAllBreedsFromDbAsync_DebeRetornarLista_CuandoHayRegistros()
+        {
+            var listaEntidades = new List<Breed>
+            {
+                new Breed { Id = Guid.NewGuid(), Name = "Persa", Origin = "Irán" },
+                new Breed { Id = Guid.NewGuid(), Name = "Siamés", Origin = "Tailandia" }
+            };
+
+            // 2. Mock del repositorio: cuando llamen a GetAllAsync, devolvemos la lista
+            _repoMock.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>()))
+                     .ReturnsAsync(listaEntidades);
+
+            var httpClient = new HttpClient();
+            var service = new CatService(httpClient, _contextMock.Object, _loggerMock.Object, _validatorMock.Object, _repoMock.Object);
+
+            var result = await service.GetAllBreedsFromDbAsync();
+
+            Assert.True(result.IsSuccess);
+            Assert.Equal(2, result.Value.Count);
+            Assert.Equal("Persa", result.Value[0].Name);
+
+            // Verify =  Se llamó al repositorio
+            _repoMock.Verify(r => r.GetAllAsync(It.IsAny<CancellationToken>()), Times.Once);
+        }
+
+        [Fact]
+        public async Task GetAllBreedsFromDbAsync_DebeRetornarListaVacia_CuandoNoHayRegistros()
+        {
+            var listaVacia = new List<Breed>();
+
+            _repoMock.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>()))
+                     .ReturnsAsync(listaVacia);
+
+            var httpClient = new HttpClient();
+            var service = new CatService(httpClient, _contextMock.Object, _loggerMock.Object, _validatorMock.Object, _repoMock.Object);
+
+            var result = await service.GetAllBreedsFromDbAsync();
+
+            Assert.True(result.IsSuccess);
+            Assert.NotNull(result.Value);
+            Assert.Empty(result.Value);
+        }
+
+        [Fact]
+        public async Task GetAllBreedsFromDbAsync_DebeRetornarFallo_CuandoOcurreExcepcion()
+        {
+
+            _repoMock.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>()))
+                     .ThrowsAsync(new Exception("Error de conexión"));
+
+            var httpClient = new HttpClient();
+            var service = new CatService(httpClient, _contextMock.Object, _loggerMock.Object, _validatorMock.Object, _repoMock.Object);
+
+            var result = await service.GetAllBreedsFromDbAsync();
+
+
+            Assert.False(result.IsSuccess);
+            Assert.Contains("Error de conexión", result.Message);
+        }
+
+        #endregion
+
         #region Tests PostBreedAsync
 
         [Fact]

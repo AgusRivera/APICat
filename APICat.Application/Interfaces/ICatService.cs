@@ -14,5 +14,6 @@ namespace APICat.Application.Interfaces
         Task<IOperationResult<BreedsDto>> GetBreedByIdAsync(string id);
         Task<IOperationResult> PostBreedAsync(BreedsDto breed);
         Task<IOperationResult> DeleteBreedAsync(Guid id);
+        Task<IOperationResult<List<BreedsDto>>> GetAllBreedsFromDbAsync();
     }
 }

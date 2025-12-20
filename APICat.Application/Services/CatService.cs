@@ -85,6 +85,32 @@ namespace APICat.Application.Services
             }
         }
 
+        [LogExecution("Obteniendo todas las razas almacenadas en la DB")]
+        public async Task<IOperationResult<List<BreedsDto>>> GetAllBreedsFromDbAsync()
+        {
+            try
+            {
+                var entities = await _repo.GetAllAsync();
+
+                var dtos = entities.Select(e => new BreedsDto
+                {
+                    Id = e.Id.ToString(),
+                    Name = e.Name,
+                    Origin = e.Origin,
+                    Temperament = e.Temperament,
+                    Description = e.Description,
+                    Wikipedia_url = e.Wikipedia_url
+                }).ToList();
+
+                return OperationResult.Success(dtos);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al obtener las razas de la DB");
+                return OperationResult.Fail<List<BreedsDto>>($"Ocurrió un error al recuperar los datos: {ex.Message}");
+            }
+        }
+
         [LogExecution("Insertando nueva raza a la tabla en DB")]
         public async Task<IOperationResult> PostBreedAsync(BreedsDto breed)
         {

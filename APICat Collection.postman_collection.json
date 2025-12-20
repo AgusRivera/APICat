@@ -179,6 +179,31 @@
 				"description": "Elimina una raza de gato por su GUID. Implementa transacción segura en DB."
 			},
 			"response": []
+		},
+		{
+			"name": "6. Get All Breeds DB (Protegido)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/Cat/GetAllFromDb",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"Cat",
+						"GetAllFromDb"
+					]
+				},
+				"description": "Obtiene todos los registros de la tabla Breeds de la base de datos local."
+			},
+			"response": []
 		}
 	],
 	"event": [
