@@ -1,0 +1,35 @@
+USE [APICat];
+GO
+
+INSERT INTO [dbo].[Breeds] ([Id], [Name], [Origin], [Description], [Temperament], [Wikipedia_url]) VALUES
+(NEWID(), N'Abyssinian', N'Ethiopia', N'Gato activo y curioso de pelo corto.', N'Enérgico, inquisitivo, sociable', N'https://en.wikipedia.org/wiki/Abyssinian_cat'),
+(NEWID(), N'Aegean', N'Greece', N'Raza natural de las islas griegas.', N'Amigable, alerta, adaptable', N'https://en.wikipedia.org/wiki/Aegean_cat'),
+(NEWID(), N'American Bobtail', N'United States', N'Cola corta natural; robusto y afectuoso.', N'Leal, juguetón, inteligente', N'https://en.wikipedia.org/wiki/American_Bobtail'),
+(NEWID(), N'American Curl', N'United States', N'Orejas curvadas hacia atrás; sociable.', N'Dócil, curioso, amistoso', N'https://en.wikipedia.org/wiki/American_Curl'),
+(NEWID(), N'American Shorthair', N'United States', N'Pelo corto; saludable y adaptable.', N'Calmo, sociable, equilibrado', N'https://en.wikipedia.org/wiki/American_Shorthair'),
+(NEWID(), N'American Wirehair', N'United States', N'Pelaje áspero y rizado característico.', N'Tranquilo, afectuoso, reservado', N'https://en.wikipedia.org/wiki/American_Wirehair'),
+(NEWID(), N'Arabian Mau', N'Arabian Peninsula', N'Raza del desierto; resistente y activa.', N'Enérgica, alerta, cariñosa', N'https://en.wikipedia.org/wiki/Arabian_Mau'),
+(NEWID(), N'Australian Mist', N'Australia', N'Pelaje moteado; gran gato de familia.', N'Dulce, sociable, tolerante', N'https://en.wikipedia.org/wiki/Australian_Mist'),
+(NEWID(), N'Balinese', N'United States', N'Variante de siamés con pelo largo.', N'Vocal, afectuoso, inteligente', N'https://en.wikipedia.org/wiki/Balinese_cat'),
+(NEWID(), N'Bengal', N'United States', N'Apariencia salvaje con manchas y rosetas.', N'Activo, inteligente, juguetón', N'https://en.wikipedia.org/wiki/Bengal_cat'),
+(NEWID(), N'Birman', N'France', N'Guantes blancos; ojos azules.', N'Dócil, cariñoso, tranquilo', N'https://en.wikipedia.org/wiki/Birman'),
+(NEWID(), N'Bombay', N'United States', N'Negro sólido; apariencia de pantera.', N'Afectuoso, confiado, social', N'https://en.wikipedia.org/wiki/Bombay_cat'),
+(NEWID(), N'British Shorthair', N'United Kingdom', N'Robusto; caracter tranquilo.', N'Calmado, leal, independiente', N'https://en.wikipedia.org/wiki/British_Shorthair'),
+(NEWID(), N'Burmese', N'Myanmar', N'Musculoso; muy sociable y vocal.', N'Afectuoso, activo, social', N'https://en.wikipedia.org/wiki/Burmese_cat'),
+(NEWID(), N'Chartreux', N'France', N'Pelo azul-gris; silencioso y amable.', N'Sosegado, leal, observador', N'https://en.wikipedia.org/wiki/Chartreux'),
+(NEWID(), N'Chausie', N'United States', N'Híbrido con aspecto atlético.', N'Enérgico, inteligente, curioso', N'https://en.wikipedia.org/wiki/Chausie'),
+(NEWID(), N'Cornish Rex', N'United Kingdom', N'Pelaje rizado; muy activo y ágil.', N'Juguetón, sociable, travieso', N'https://en.wikipedia.org/wiki/Cornish_Rex'),
+(NEWID(), N'Cymric', N'Isle of Man', N'Variante de Manx de pelo largo.', N'Tranquilo, leal, afectuoso', N'https://en.wikipedia.org/wiki/Cymric'),
+(NEWID(), N'Devon Rex', N'United Kingdom', N'Rizado, orejas grandes; muy juguetón.', N'Cariñoso, travieso, curioso', N'https://en.wikipedia.org/wiki/Devon_Rex'),
+(NEWID(), N'Egyptian Mau', N'Egypt', N'Manchado natural; rápido y alerta.', N'Leal, activo, sensible', N'https://en.wikipedia.org/wiki/Egyptian_Mau'),
+(NEWID(), N'European Burmese', N'Europe', N'Burmés con estándar europeo.', N'Afectuoso, social, inteligente', N'https://en.wikipedia.org/wiki/European_Burmese'),
+(NEWID(), N'Exotic Shorthair', N'United States', N'Persa de pelo corto; calmado.', N'Tierno, tranquilo, cariñoso', N'https://en.wikipedia.org/wiki/Exotic_Shorthair'),
+(NEWID(), N'Havana Brown', N'United Kingdom', N'Marrón sólido; curioso y social.', N'Curioso, afectuoso, atento', N'https://en.wikipedia.org/wiki/Havana_Brown'),
+(NEWID(), N'Himalayan', N'United States', N'Cruce persa-siamés; ojos azules.', N'Tranquilo, cariñoso, sereno', N'https://en.wikipedia.org/wiki/Himalayan_cat'),
+(NEWID(), N'Japanese Bobtail', N'Japan', N'Cola corta; tradicional en Japón.', N'Activo, sociable, vocal', N'https://en.wikipedia.org/wiki/Japanese_Bobtail'),
+(NEWID(), N'Javanese', N'United States', N'Relacionado al balinés/siamés.', N'Vocal, cariñoso, inteligente', N'https://en.wikipedia.org/wiki/Javanese_cat'),
+(NEWID(), N'Khao Manee', N'Thailand', N'Blanco puro; ojos brillantes.', N'Curioso, afectuoso, alerta', N'https://en.wikipedia.org/wiki/Khao_Manee'),
+(NEWID(), N'Korat', N'Thailand', N'Azul plateado; símbolo de buena suerte.', N'Devoto, sensible, tranquilo', N'https://en.wikipedia.org/wiki/Korat'),
+(NEWID(), N'LaPerm', N'United States', N'Pelaje rizado natural; cariñoso.', N'Dócil, juguetón, afectivo', N'https://en.wikipedia.org/wiki/LaPerm'),
+(NEWID(), N'Maine Coon', N'United States', N'Gran tamaño; amable y sociable.', N'Amistoso, dócil, adaptable', N'https://en.wikipedia.org/wiki/Maine_Coon');
+GO
