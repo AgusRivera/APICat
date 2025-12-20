@@ -104,5 +104,8 @@ El proyecto incluye un `Dockerfile` para generar la imagen de la API de forma ai
 Ejecuta desde la raíz de la solución:
 ```bash
 docker build -t apicat-image -f APICat/Dockerfile .
+```
 
-##Desarrollado por Agustín Gonzalo Rivera
+Desarrollado por: Agustín Gonzalo Rivera - Prueba Técnica Diciembre 2025
+
+
