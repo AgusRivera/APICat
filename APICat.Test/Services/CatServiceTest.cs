@@ -196,8 +196,91 @@ namespace APICat.Tests.Services
             Assert.False(result.IsSuccess);
             Assert.Contains("Error de base de datos simulado", result.Message);
 
-            // VERIFY = Rollback
+            // Verify = Rollback
             _transactionMock.Verify(t => t.Rollback(), Times.Once);
+            _transactionMock.Verify(t => t.Commit(), Times.Never);
+        }
+
+        #endregion
+
+        #region Tests DeleteBreedAsync
+
+        [Fact]
+        public async Task DeleteBreedAsync_DebeEliminarYCommitear_CuandoRegistroExiste()
+        {
+            var id = Guid.NewGuid();
+            var httpClient = new HttpClient();
+
+            _repoMock.Setup(r => r.ExecuteDeleteByIdAsync(id, It.IsAny<CancellationToken>()))
+                     .ReturnsAsync(1);
+
+            _repoMock.Setup(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()))
+                     .ReturnsAsync(1);
+
+            var service = new CatService(httpClient, _contextMock.Object, _loggerMock.Object, _validatorMock.Object, _repoMock.Object);
+
+
+            var result = await service.DeleteBreedAsync(id);
+
+
+            Assert.True(result.IsSuccess);
+            Assert.Contains("eliminado correctamente", result.Message);
+
+            // Verify =
+            // 1. Se inicia la transacción
+            _contextMock.Verify(c => c.Database.BeginTransactionAsync(It.IsAny<CancellationToken>()), Times.Once);
+
+            // 2. Se llama al método de borrado del repositorio
+            _repoMock.Verify(r => r.ExecuteDeleteByIdAsync(id, It.IsAny<CancellationToken>()), Times.Once);
+
+            // 3. Se hace commit
+            _transactionMock.Verify(t => t.Commit(), Times.Once);
+        }
+
+        [Fact]
+        public async Task DeleteBreedAsync_DebeRetornarFallo_CuandoRegistroNoExiste()
+        {
+            var id = Guid.NewGuid();
+            var httpClient = new HttpClient();
+
+            _repoMock.Setup(r => r.ExecuteDeleteByIdAsync(id, It.IsAny<CancellationToken>()))
+                     .ReturnsAsync(0);
+
+            var service = new CatService(httpClient, _contextMock.Object, _loggerMock.Object, _validatorMock.Object, _repoMock.Object);
+
+            var result = await service.DeleteBreedAsync(id);
+
+            Assert.False(result.IsSuccess);
+            Assert.Contains("No se encontró", result.Message);
+
+            // Verify = 
+            // Return antes de hacer commit, por lo que Commit NUNCA debe llamarse
+            _transactionMock.Verify(t => t.Commit(), Times.Never);
+            // Tampoco a SaveChanges
+            _repoMock.Verify(r => r.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Never);
+        }
+
+        [Fact]
+        public async Task DeleteBreedAsync_DebeHacerRollback_CuandoOcurreExcepcion()
+        {
+            var id = Guid.NewGuid();
+            var httpClient = new HttpClient();
+
+            // Simulamos una excepción en el repositorio
+            _repoMock.Setup(r => r.ExecuteDeleteByIdAsync(id, It.IsAny<CancellationToken>()))
+                     .ThrowsAsync(new Exception("Error crítico de DB"));
+
+            var service = new CatService(httpClient, _contextMock.Object, _loggerMock.Object, _validatorMock.Object, _repoMock.Object);
+
+            var result = await service.DeleteBreedAsync(id);
+
+            Assert.False(result.IsSuccess);
+            Assert.Contains("Error crítico de DB", result.Message);
+
+            // Verify = 
+            // Al fallar en el try, debe ir al catch y ejecutar Rollback
+            _transactionMock.Verify(t => t.Rollback(), Times.Once);
+            // Aseguramos que NO se hizo commit
             _transactionMock.Verify(t => t.Commit(), Times.Never);
         }
 

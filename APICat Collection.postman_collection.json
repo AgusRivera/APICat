@@ -152,6 +152,33 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "5. Delete Breed (Protegido)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text",
+						"description": "Token JWT necesario"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/Cat/Delete/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"Cat",
+						"Delete",
+						"3fa85f64-5717-4562-b3fc-2c963f66afa6"
+					]
+				},
+				"description": "Elimina una raza de gato por su GUID. Implementa transacción segura en DB."
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -179,7 +206,7 @@
 	"variable": [
 		{
 			"key": "base_url",
-			"value": "https://localhost:7001"
+			"value": "https://localhost:7030"
 		},
 		{
 			"key": "jwt_token",

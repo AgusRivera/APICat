@@ -86,5 +86,34 @@ namespace APICat.Controllers
             var result = await _catService.PostBreedAsync(breeds);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Elimina una raza de gato de la base de datos local por su ID (Guid).
+        /// </summary>
+        /// <param name="id">El GUID de la raza a eliminar.</param>
+        /// <returns>Resultado de la operación.</returns>
+        /// <response code="200">El registro fue eliminado o se procesó la solicitud.</response>
+        /// <response code="404">No se encontró el registro con ese ID.</response>
+        /// <response code="401">No autorizado.</response>
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        [ProducesResponseType(typeof(IOperationResult), 200)]
+        [ProducesResponseType(typeof(IOperationResult), 404)]
+        [ProducesResponseType(401)]
+        public async Task<ActionResult<IOperationResult>> DeleteBreed(Guid id)
+        {
+            var result = await _catService.DeleteBreedAsync(id);
+
+            if (!result.IsSuccess)
+            {
+                if (result.Message.Contains("No se encontró"))
+                {
+                    return NotFound(result);
+                }
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
     }
 }

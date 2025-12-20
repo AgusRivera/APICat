@@ -121,5 +121,32 @@ namespace APICat.Application.Services
                 return OperationResult.Fail( $"Ocurrió un error en la inserción del registro, {ex.Message}");
             }
         }
+
+        [LogExecution("Eliminando raza de gato de la DB")]
+        public async Task<IOperationResult> DeleteBreedAsync(Guid id)
+        {
+            var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var rowsAffected = await _repo.ExecuteDeleteByIdAsync(id);
+
+                if (rowsAffected == 0)
+                {
+                    return OperationResult.Fail($"No se encontró ninguna raza con el ID: {id}");
+                }
+
+                await _repo.SaveChangesAsync();
+
+                transaction.Commit();
+
+                return OperationResult.Success($"El registro {id} fue eliminado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                _logger.LogError(ex, "Error al eliminar la raza {Id}", id);
+                return OperationResult.Fail($"Ocurrió un error al intentar eliminar el registro: {ex.Message}");
+            }
+        }
     }
 }
