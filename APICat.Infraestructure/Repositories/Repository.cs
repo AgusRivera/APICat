@@ -1,6 +1,7 @@
 ﻿using APICat.Domain;
 using APICat.Domain.Entities.Base;
 using APICat.Domain.Interfaces.Repositories;
+using APICat.Infraestructure.Resolvers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,13 @@ namespace APICat.Infraestructure.Repositories
         private readonly DbSet<TEntity> _dbSet;
         private bool _disposedValue;
 
-        public Repository(DbContext context)
+        public Repository(IDbContextResolver contextResolver)
         {
-            ArgumentNullException.ThrowIfNull(context, nameof(context));
-            _context = context;
+            _context = contextResolver.GetContext<TEntity>();
             _dbSet = _context.Set<TEntity>();
+
+            if (_context == null)
+                throw new ArgumentNullException("No se pudo resolver el contexto");
         }
 
         /// <summary>

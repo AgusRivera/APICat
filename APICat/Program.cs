@@ -2,6 +2,7 @@ using ApiCat.Extensions;
 using APICat.Application.Extensions;
 using APICat.Extensions;
 using APICat.Infraestructure.Contexts;
+using APICat.Infraestructure.Resolvers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -36,7 +37,7 @@ try
 
     builder.Services.AddDbContext<CatContext>(config => config.UseSqlServer(builder.Configuration.GetConnectionString("CatDBConnection")));
 
-    builder.Services.AddScoped<DbContext, CatContext>();
+    builder.Services.AddScoped<IDbContextResolver, DbContextResolver>();
 
     // Add services to the container.
     builder.Services.AddRepositoriesAndServices();
