@@ -301,3 +301,7 @@ System.InvalidOperationException: Unable to resolve service for type 'Microsoft.
 [2025-12-20 16:25:00 WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while while scanning assembly 'APICat.Infraestructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
 [2025-12-20 16:25:06 INF] HTTP GET /Cat/Breeds responded 200 in 6534.5663 ms
 [2025-12-20 16:26:49 INF] HTTP GET /Cat/Breeds responded 200 in 51566.2106 ms
+[2025-12-20 16:53:04 INF] >>>>> APICat: Iniciando la Aplicación
+[2025-12-20 16:53:24 INF] HTTP POST /api/auth/Login responded 200 in 309.8920 ms
+[2025-12-20 16:54:15 WRN] No instantiatable types implementing `IEntityTypeConfiguration` were found while while scanning assembly 'APICat.Infraestructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+[2025-12-20 16:54:18 INF] HTTP POST /Cat/Insert responded 200 in 12901.4658 ms

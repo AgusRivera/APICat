@@ -64,15 +64,12 @@ try
     // NOTA: Si bien la nueva implementación se hace con la siguiente instrucción AddOpenApi(),
     //       prefiero usar la implementación tradicional con swashbuckle, par no perder la configuración personalizada.
     //              -- Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi -- 
-    
-    //builder.Services.AddOpenApi();
 
     if (builder.Environment.IsDevelopment())
     {
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(options =>
         {
-            // Información extra para la documentación de swagger.
             options.SwaggerDoc("v1", new OpenApiInfo()
             {
                 Title = nombreProyecto,
@@ -104,6 +101,11 @@ try
                     new string[] {}
                 }
             });
+
+            var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+            options.IncludeXmlComments(xmlPath);
         });
     }
     
@@ -111,7 +113,6 @@ try
 
     if (app.Environment.IsDevelopment())
     {
-        //! Configuración de los endpoints y la url de swagger.
         app.UseSwagger();
         app.UseSwaggerUI(opt =>
         {
