@@ -1,6 +1,5 @@
-using ApiCat.Extensions;
-using APICat.Application.Extensions;
 using APICat.Extensions;
+using APICat.Application.Extensions;
 using APICat.Infraestructure.Contexts;
 using APICat.Infraestructure.Resolvers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

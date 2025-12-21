@@ -11,9 +11,6 @@
 *.userosscache
 *.sln.docstates
 
-appsettings.Local.json
-appsettings.Development.json
-
 .env
 
 .docker/

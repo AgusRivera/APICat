@@ -28,9 +28,9 @@ namespace APICat.Application.Services
         private readonly ILogger _logger;
         private readonly IValidator<BreedsDto> _breedValidator;
 
-        public CatService(HttpClient client, CatContext context, ILogger<CatService> logger, IValidator<BreedsDto> breedValidator, IRepository<Breed, Guid> repo)
+        public CatService(IHttpClientFactory client, CatContext context, ILogger<CatService> logger, IValidator<BreedsDto> breedValidator, IRepository<Breed, Guid> repo)
         {
-            _client = client;
+            _client = client.CreateClient("ApiExt");
             _context = context;
             _repo = repo;
             _logger = logger;

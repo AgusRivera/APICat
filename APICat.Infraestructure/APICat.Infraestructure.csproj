@@ -24,8 +24,4 @@
     <ProjectReference Include="..\APICat.Domain\APICat.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
-
 </Project>
