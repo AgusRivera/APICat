@@ -35,7 +35,6 @@ Contiene la lógica de negocio pura, DTOs y validaciones. No depende de detalles
 ### 3. APICat.Infrastructure
 Capa encargada del acceso a datos, implementaciones de repositorios y comunicación externa.
 * **Características Clave:**
-    * **DispatchProxy:** Se utiliza para crear proxies dinámicos que interceptan las llamadas a los servicios. Esto permite inyectar lógica transversal (como logging o manejo de errores) sin ensuciar la lógica de negocio.
     * **Resolvers y Multi-DB:** Gracias a la carpeta `Resolvers`, la aplicación es capaz de gestionar **conexiones a múltiples bases de datos**. Los resolvers determinan en tiempo de ejecución qué `DbContext` o cadena de conexión utilizar según el contexto de la petición.
 * **Paquetes:**
     * `Microsoft.EntityFrameworkCore` (9.0.11)
@@ -46,6 +45,9 @@ Capa encargada del acceso a datos, implementaciones de repositorios y comunicaci
 
 ### 4. APICat.Logging
 Proyecto transversal dedicado a la configuración y gestión de logs estructurados.
+
+* **Características Clave:**
+    * **DispatchProxy:** Se utiliza para crear proxies dinámicos que interceptan las llamadas a los servicios. Esto permite inyectar lógica transversal (como logging o manejo de errores) sin ensuciar la lógica de negocio.
 * **Paquetes:**
     * `Serilog` (4.3.0)
     * `Serilog.AspNetCore` (10.0.0)
