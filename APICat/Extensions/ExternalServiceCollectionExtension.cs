@@ -1,16 +1,19 @@
-﻿public static class ExternalServiceCollectionExtension
+﻿namespace APICat.Extensions
 {
-    public static void RegisterExternalServices(this WebApplicationBuilder builder)
+    public static class ExternalServiceCollectionExtension
     {
-        var baseUrl = builder.Configuration["ApiCat:BaseUrl"];
-        var apiKey = builder.Configuration["ApiCat:ApiKey"];
-
-        if (string.IsNullOrEmpty(baseUrl)) throw new ArgumentNullException("ApiCat:BaseUrl");
-
-        builder.Services.AddHttpClient("ApiExt", client =>
+        public static void RegisterExternalServices(this WebApplicationBuilder builder)
         {
-            client.BaseAddress = new Uri(baseUrl);
-            client.DefaultRequestHeaders.Add("x-api-key", apiKey);
-        });
+            var baseUrl = builder.Configuration["ApiCat:BaseUrl"];
+            var apiKey = builder.Configuration["ApiCat:ApiKey"];
+
+            if (string.IsNullOrEmpty(baseUrl)) throw new ArgumentNullException("ApiCat:BaseUrl");
+
+            builder.Services.AddHttpClient("ApiExt", client =>
+            {
+                client.BaseAddress = new Uri(baseUrl);
+                client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+            });
+        }
     }
 }
